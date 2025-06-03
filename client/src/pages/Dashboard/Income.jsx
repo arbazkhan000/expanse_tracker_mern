@@ -22,7 +22,6 @@ const Income = () => {
                 },
             });
 
-            console.log("Fetched income data:", data);
 
             if (data && Array.isArray(data.data)) {
                 setIncomes(data.data);
