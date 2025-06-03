@@ -10,14 +10,6 @@ const IncomeController = {
                 createdAt: -1,
             });
 
-            if (!income || income.length > 0) {
-                return res.status(200).json({
-                    success: true,
-                    message: "No income found",
-                   
-                });
-            }
-
             return res.status(200).json({
                 success: true,
                 message: "Income retrieved successfully",
