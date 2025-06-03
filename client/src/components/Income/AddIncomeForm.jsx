@@ -23,8 +23,19 @@ const AddIncomeForm = ({ isOpen, onClose, onSave }) => {
         setLoading(true);
         setError(null);
 
+        // Client-side validation for amount
+        const parsedAmount = Number(formData.amount);
+        if (isNaN(parsedAmount) || parsedAmount <= 0) {
+            setError("Amount must be a positive number.");
+            setLoading(false);
+            return;
+        }
+
         try {
-            const response = await axiosInstance.post("/income", formData, {
+            const dataToSend = { ...formData, amount: parsedAmount };
+            console.log("Sending data:", dataToSend);
+
+            const response = await axiosInstance.post("/income", dataToSend, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
@@ -53,7 +64,7 @@ const AddIncomeForm = ({ isOpen, onClose, onSave }) => {
         <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
                 <h2 className="text-xl font-semibold text-violet-600 mb-4">
-                    Add Expense
+                    Add Income
                 </h2>
 
                 {error && <p className="text-sm text-red-500 mb-2">{error}</p>}

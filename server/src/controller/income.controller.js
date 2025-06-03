@@ -10,10 +10,11 @@ const IncomeController = {
                 createdAt: -1,
             });
 
-            if (!income || income.length === 0) {
-                return res.status(404).json({
-                    success: false,
+            if (!income || income.length > 0) {
+                return res.status(200).json({
+                    success: true,
                     message: "No income found",
+                   
                 });
             }
 
@@ -21,7 +22,6 @@ const IncomeController = {
                 success: true,
                 message: "Income retrieved successfully",
                 data: income,
-                total: income.length,
             });
         } catch (error) {
             console.error("Error in getAllIncome:", error);
@@ -41,10 +41,10 @@ const IncomeController = {
 
             const { title, amount, category, source, description } = req.body;
 
-            if (!title || !amount || !category || !source || !description) {
+            if (!title || !amount || !category) {
                 return res.status(400).json({
                     success: false,
-                    message: "Please fill all fields",
+                    message: "Please fill all required fields (Title, Amount, Category)",
                 });
             }
             const income = await Income.create({

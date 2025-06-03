@@ -150,55 +150,54 @@ const Expanse = () => {
                     <ul className="space-y-3">
                         {expenses
                             .sort((a, b) => new Date(b.date) - new Date(a.date))
-                            ?.map((e) => (
-                                <li
-                                    key={e._id}
-                                    className="bg-white cursor-pointer shadow p-4 rounded-md flex justify-between items-center hover:shadow-md transition"
-                                >
-                                    <div className="flex items-center space-x-3">
-                                        <div>
-                                            <p className="font-medium">
-                                                {e.title}
-                                            </p>
-                                            {e.description && (
-                                                <p className="text-sm text-gray-600 mt-1">
-                                                    {e.description}
+                            ?.map((e) => {
+                                return (
+                                    <li
+                                        key={e._id}
+                                        className="bg-white cursor-pointer shadow p-4 rounded-md flex justify-between items-center hover:shadow-md transition"
+                                    >
+                                        <div className="flex items-center space-x-3">
+                                            <div>
+                                                <p className="font-medium">
+                                                    {e.title}
                                                 </p>
-                                            )}
-                                            <p className="text-sm text-gray-500">
-                                                {new Date(
-                                                    e.date
-                                                ).toLocaleDateString("en-US", {
-                                                    year: "numeric",
-                                                    month: "short",
-                                                    day: "numeric",
-                                                })}
-                                            </p>
+                                                {e.description && (
+                                                    <p className="text-sm text-gray-600 mt-1">
+                                                        {e.description}
+                                                    </p>
+                                                )}
+                                                <p className="text-sm text-gray-500">
+                                                    {new Date(
+                                                        e.date
+                                                    ).toLocaleDateString("en-US", {
+                                                        year: "numeric",
+                                                        month: "short",
+                                                        day: "numeric",
+                                                    })}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div className="flex items-center space-x-4">
-                                        <span className="text-[#EA7070] font-semibold whitespace-nowrap">
-                                            - ₹
-                                            {Number(e.amount).toLocaleString(
-                                                "en-IN"
-                                            )}
-                                        </span>
-                                        <div className="flex space-x-2">
-                                            <MdEdit
-                                                className="text-gray-500 text-xl cursor-pointer hover:text-violet-600 transition"
-                                                onClick={() => handleEdit(e)}
-                                            />
-                                            <MdDelete
-                                                className="text-[#EA7070] text-xl cursor-pointer hover:text-red-700 transition"
-                                                onClick={() =>
-                                                    handleDelete(e._id)
-                                                }
-                                            />
+                                        <div className="flex items-center space-x-4">
+                                            <span className="text-[#EA7070] font-semibold whitespace-nowrap">
+                                                - ₹
+                                                {Number(e.amount).toLocaleString(
+                                                    "en-IN"
+                                                )}
+                                            </span>
+                                            <div className="flex space-x-2">
+                                                
+                                                <MdDelete
+                                                    className="text-[#EA7070] text-xl cursor-pointer hover:text-red-700 transition"
+                                                    onClick={() =>
+                                                        handleDelete(e._id)
+                                                    }
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            ))}
+                                    </li>
+                                );
+                            })}
                     </ul>
                 )}
             </div>
