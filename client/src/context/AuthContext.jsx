@@ -14,30 +14,30 @@ export const AuthProvider = ({ children }) => {
         profileImage: "",
     });
 
-    useEffect(() => {
-        const fetchProfile = async () => {
-            try {
-                const token = localStorage.getItem("token");
+    // useEffect(() => {
+    //     const fetchProfile = async () => {
+    //         try {
+    //             const token = localStorage.getItem("token");
 
-                const { data } = await axiosInstance.get("/auth/profile", {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+    //             const { data } = await axiosInstance.get("/auth/profile", {
+    //                 headers: {
+    //                     Authorization: `Bearer ${token}`,
+    //                 },
+    //             });
 
-                if (data.success) {
-                    setUser(data.user);
-                }
-            } catch (error) {
-                console.error("Error fetching profile", error);
-                setUser(null);
-            } finally {
-                setLoading(false);
-            }
-        };
+    //             if (data.success) {
+    //                 setUser(data.user);
+    //             }
+    //         } catch (error) {
+    //             console.error("Error fetching profile", error);
+    //             setUser(null);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
 
-        fetchProfile();
-    }, []);
+    //     fetchProfile();
+    // }, []);
 
     const register = async (name, email, password, profileImage) => {
         setLoading(true);
